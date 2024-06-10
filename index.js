@@ -3,6 +3,8 @@ const app=express();// initialize express
 const mongoose=require('mongoose');// import mongoose
 const { connectToMongoDB }=require('./connect');// import mongoose connectiion function from connect.js
 const URL=require('./models/url')//import url schema model
+const cookieParser=require('cookie-parser');
+const {restrictToLoggedInUserOnly}=require('./middleware/authmiddleware');
 const PORT = 4000;// define the port 
 const path=require('path');
 
@@ -24,9 +26,9 @@ app.set('views', path.resolve('./views'));
 
 app.use(express.urlencoded({extended:false}));
 app.use(express.json()); // use for parsing the json body
+app.use(cookieParser());
 
-
-app.use("/url", urlroute);//implementing all the routes of urlroute file
+app.use("/url", restrictToLoggedInUserOnly, urlroute);//implementing all the routes of urlroute file
 app.use('/',staticRoute);
 app.use('/user',userRoute);
 
