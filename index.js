@@ -5,6 +5,9 @@ const { connectToMongoDB }=require('./connect');// import mongoose connectiion f
 const urlroute=require('./routes/urlrouter');// import url routes from routes file
 const URL=require('./models/url')//import url schema model
 const PORT = 8081;// define the port 
+const path=require('path');
+const staticRoute=require('./routes/staticRouter')
+
 
 connectToMongoDB('mongodb://localhost:27017/short-url').then(()=>{
     console.log("connected to database");
@@ -12,14 +15,16 @@ connectToMongoDB('mongodb://localhost:27017/short-url').then(()=>{
     console.error("Failed to connect to database", err);
 });//the mongoose connection function with error handling
 
+
+app.use(express.urlencoded({extended:false}));
 app.use(express.json()); // use for parsing the json body
 app.use("/url", urlroute);//implementing all the routes of urlroute file
+app.set('view engine','ejs');
+app.set('views', path.resolve('./views'));
+app.use('/',staticRoute);
 
-app.get('/',(req,res)=>{
-    res.status(200).send("Welcome to URL shortner website");
-});//the basic index page of website
 
-app.get('/:id',async (req,res)=>{
+app.get('/url/:id',async (req,res)=>{
     const shortId=req.params.id;
     const entry=await URL.findOneAndUpdate(
     {
@@ -32,7 +37,12 @@ app.get('/:id',async (req,res)=>{
     },
     }
 );
+if (entry) {
     res.redirect(entry.redirectUrl);
+} else {
+    res.status(404).send('Short ID not found');
+}
+
 });//the analytics function which return number of clicks and id of clicks 
 
 

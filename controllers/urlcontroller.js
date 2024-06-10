@@ -10,12 +10,15 @@ async function handleGenerateNewUrl(req,res){
     const shortID=shortid.generate();
     console.log("Generated Short ID:", shortID); 
     try {
-        const newURL =  URL.create({
+        const newURL = await URL.create({
             shortID: shortID,
             redirectUrl: body.url,
             visitHistory: []
         });console.log("Created URL Document:", newURL);
-        return res.json({ id: shortID });
+        return res.render('home',{
+            id:shortID,
+        });
+        //return res.json({ id: shortID });
     } catch (error) {
         console.error("Error creating URL document:", error); // Log error details
         return res.status(500).json({ error: "Error creating URL document" });
