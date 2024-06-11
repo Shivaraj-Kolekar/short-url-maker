@@ -9,6 +9,7 @@ const {
   checkAuth
 } = require('./middleware/authmiddleware')
 const PORT = process.env.PORT // define the port
+const mongodb_URL = process.env.MONGO_URL
 const path = require('path')
 require('dotenv').config()
 
@@ -18,7 +19,7 @@ const staticRoute = require('./routes/staticRouter') //import static router
 const userRoute = require('./routes/userRoute')
 
 //mongo db connection
-connectToMongoDB('mongodb://localhost:27017/short-url')
+connectToMongoDB(mongodb_URL)
   .then(() => {
     console.log('connected to database')
   })
