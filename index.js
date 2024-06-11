@@ -9,7 +9,8 @@ const {
   checkAuth
 } = require('./middleware/authmiddleware')
 const PORT = process.env.PORT // define the port
-const mongodb_URL = process.env.MONGO_URL
+const mongodb_URL =
+  process.env.MONGO_URL || 'mongodb://localhost:27017/short-url'
 const path = require('path')
 require('dotenv').config()
 
