@@ -10,7 +10,11 @@
 <body>
     <h1>URl shortenr</h1>
     <% if(locals.id) { %>
-        <p>Short url generated: http://localhost:8081/url/<%= id %>
+        <!--<p>Short url generated: <a href="http://localhost:4000/url/<%= //id %>">http://localhost:4000/url/<%=// id %></a>
+        </p> this is commented to test out the new link in which they are clickable by <a> tags and short at same time-->
+        <p>Short url generated: <a href="http://localhost:4000/url/<%= id %>">
+                <%= id %>
+            </a>
         </p>
         <%} %>
 
