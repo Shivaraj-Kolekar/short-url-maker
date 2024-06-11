@@ -8,8 +8,9 @@ const {
   restrictToLoggedInUserOnly,
   checkAuth
 } = require('./middleware/authmiddleware')
-const PORT = 4000 // define the port
+const PORT = process.env.PORT // define the port
 const path = require('path')
+require('dotenv').config()
 
 //uel routes imports
 const urlroute = require('./routes/urlrouter') // import url routes from routes file
