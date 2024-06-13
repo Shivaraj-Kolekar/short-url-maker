@@ -136,10 +136,100 @@
         .buttons {
             margin: 20px;
         }
+
+        header {
+            background: #212529;
+            color: black;
+            padding: 10px 0;
+            width: 100%;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #fff;
+            padding: 0 20px 0px 20px;
+        }
+
+        .logo a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 24px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+            background-color: #495057;
+            padding: 10px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+
+
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+        }
+
+        .menu-icon {
+            display: none;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                background: #333;
+                text-align: center;
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+            }
+
+            .menu-icon {
+                display: block;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+        }
     </style>
 </head>
 
 <body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1><a href="./home.ejs">ShortURL's</a></h1>
+            </div>
+            <div class="menu-icon" onclick="toggleMenu()">
+                &#9776;
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="https://short-url-maker.vercel.app/">Home</a></li>
+                <li><a href="https://short-url-maker.vercel.app/signup">Signup</a></li>
+                <li><a href="https://short-url-maker.vercel.app/login">Login</a></li>
+            </ul>
+        </nav>
+    </header>
     <div class="signup">
         <div class='section'>
             <form id='sign-up' method="POST" action="/user/login">
