@@ -38,10 +38,9 @@ app.use(express.json()) // use for parsing the json body
 app.use(cookieParser())
 
 //endpoints
-//app.use('/url', restrictToLoggedInUserOnly, urlroute) //implementing all the routes of urlroute file
-//app.use('/', checkAuth, staticRoute)
-app.use('/url', urlroute) //implementing all the routes of urlroute file
-app.use('/', staticRoute)
+
+app.use('/url', restrictToLoggedInUserOnly, urlroute) //implementing all the routes of urlroute file
+app.use('/', checkAuth, staticRoute)
 app.use('/user', userRoute)
 
 app.get('/url/:id', async (req, res) => {
